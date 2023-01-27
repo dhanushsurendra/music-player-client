@@ -4,13 +4,10 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import CopyrightIcon from "@mui/icons-material/Copyright";
-import logo from "../../images/white_logo.svg";
+import logo from "../../images/logo-green-white-01.png";
 import styles from "./styles.module.scss";
 
 const navLinks = [
-	{ name: "Premium", link: "#" },
-	{ name: "Support", link: "#" },
-	{ name: "Download", link: "#" },
 	{ name: "Sign up", link: "/signup" },
 	{ name: "Log in", link: "/login" },
 ];
@@ -56,10 +53,9 @@ const Main = () => {
 			<main className={styles.main_container}>
 				<div className={styles.main}>
 					<h1>Listening is everything</h1>
-					<p>Millions of songs and podcasts. No credit card needed.</p>
 					<Link to="/signup">
 						<Button
-							label="GET SPOTIFY FREE"
+							label="Explore Now"
 							style={{ color: "#2941ab", width: "18rem", fontSize: "1.4rem" }}
 						/>
 					</Link>
@@ -112,7 +108,7 @@ const Main = () => {
 					</div>
 					<div className={styles.copy_right}>
 						<CopyrightIcon />
-						<span>2021 Spotify</span>
+						<span>2023 Napster</span>
 					</div>
 				</div>
 			</footer>

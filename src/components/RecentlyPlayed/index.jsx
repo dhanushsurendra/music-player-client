@@ -12,8 +12,8 @@ const RecentlyPlayed = () => {
 
                 <PlayButton />
 
-                <h5 class="heading__secondary">told you so</h5>
-                <p class="heading__text">Angles & Airways</p>
+                <h5 className="heading__secondary">told you so</h5>
+                <p className="heading__text">Angles & Airways</p>
             </div>
         </div>
     )

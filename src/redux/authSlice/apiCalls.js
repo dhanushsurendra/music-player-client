@@ -7,12 +7,10 @@ export const login = async (payload, dispatch) => {
 	dispatch(loginStart());
 	try {
 		const url = process.env.REACT_APP_API_URL + "login";
-		console.log(url)
 		const { data } = await axios.post(url, payload);
-
-		const decodeData = jwt_decode(data.data);
-		dispatch(loginSuccess({ ...decodeData, token: data.data }));
-		console.log(decodeData);
+		console.log(data)
+		// const decodeData = jwt_decode(data.data);
+		// dispatch(loginSuccess({ ...decodeData, token: data.data }));
 		// toast.success(data.message);
 		// window.location = "/home";
 		// return true;

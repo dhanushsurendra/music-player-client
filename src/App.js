@@ -18,7 +18,6 @@ import Search from "./pages/Search";
 import LikedSongs from "./pages/LikedSongs";
 import Profile from "./pages/Profile";
 import RightSide from "./components/RightSide";
-import styles from "./styles.module.scss";
 
 const App = () => {
 	const dispatch = useDispatch();
