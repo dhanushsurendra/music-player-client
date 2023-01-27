@@ -1,0 +1,33 @@
+.section {
+	width: 100%;
+	border: 1px solid var(--border-color);
+	padding: 2rem;
+	border-radius: 10px;
+	margin: 2rem;
+}
+
+.sectionContainer {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: grid;
+	gap: 4rem;
+}
+
+
+@media (min-width: 600px) {
+	.sectionContainer {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 900px) {
+	.sectionContainer {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1600px) {
+	.sectionContainer {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
