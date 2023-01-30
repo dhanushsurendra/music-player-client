@@ -13,12 +13,21 @@ import { BsFillHeartFill } from 'react-icons/bs'
 import { RiLogoutCircleRFill } from 'react-icons/ri'
 import { MdOutlinePlaylistPlay } from 'react-icons/md'
 import { RiFolderAddFill } from 'react-icons/ri'
+import { logout } from "../../redux/authSlice";
+import { setCurrentSong } from "../../redux/audioPlayer";
 
 const Sidebar = () => {
 	const { playlists, getPlayListProgress, createPlayListProgress } =
 		useSelector((state) => state.playlists)
 	const { user } = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
+
+	const handleLogout = () => {
+		dispatch(logout());
+		dispatch(setCurrentSong(null));
+		window.location = "/login";
+	};
+
 
 	const handleCreatePlayList = () => {
 		const data = {
@@ -81,11 +90,20 @@ const Sidebar = () => {
 				<span>Favorites</span>
 			</NavLink>
 
-			<NavLink
+			{/* <NavLink
 				to="/collection/playlists"
 				className={styles.menu_link}
 				activeClassName={styles.active_menu}
 			>
+				<MdOutlinePlaylistPlay size={28} />
+				<span>Playlist</span>
+			</NavLink> */}
+
+			<NavLink
+				to={"/playlist/:" + user._id}
+				className={styles.menu_link}
+				activeClassName={styles.active_menu}
+				>
 				<MdOutlinePlaylistPlay size={28} />
 				<span>Playlist</span>
 			</NavLink>
@@ -97,16 +115,17 @@ const Sidebar = () => {
 
 			<div className={styles.underline}></div>
 
-			<NavLink
-				to="/logout"
+			<div
+				style={{cursor: 'pointer'}}
+				onClick={handleLogout}
 				className={styles.menu_link}
 				activeClassName={styles.active_menu}
 			>
 				<RiLogoutCircleRFill size={28} />
 				<span>Logout</span>
-			</NavLink>
+			</div>
 
-			{getPlayListProgress || createPlayListProgress ? (
+			{/* {getPlayListProgress || createPlayListProgress ? (
 				<div className={styles.progress_container}>
 					<CircularProgress
 						style={{ color: '#1ed760' }}
@@ -126,7 +145,7 @@ const Sidebar = () => {
 						</NavLink>
 					))}
 				</Fragment>
-			)}
+			)} */}
 		</div>
 	)
 }

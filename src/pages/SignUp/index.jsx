@@ -9,7 +9,7 @@ import Select from "../../components/Inputs/Select";
 import Radio from "../../components/Inputs/Radio";
 import Checkbox from "../../components/Inputs/Checkbox";
 import Button from "../../components/Button";
-import logo from "../../images/black_logo.svg";
+import logo from "../../images/logo-color.png";
 import styles from "./styles.module.scss";
 
 const months = [
@@ -65,12 +65,14 @@ const SignUp = () => {
 		if (Object.keys(errors).length === 0) {
 			try {
 				setIsFetching(true);
-				const url = process.env.REACT_APP_API_URL + "/users";
+				const url = process.env.REACT_APP_API_URL + "users";
+				console.log(url);
 				await axios.post(url, data);
 				setIsFetching(false);
 				toast.success("Account created successfully");
 				history.push("/login");
 			} catch (error) {
+				console.log(error);
 				setIsFetching(false);
 				if (
 					error.response &&
@@ -94,11 +96,6 @@ const SignUp = () => {
 				<img src={logo} alt="logo" />
 			</div>
 			<h1 className={styles.heading}>Sign up for free to start listening.</h1>
-			<Button
-				label="Sign up with Facebook"
-				style={{ background: "#1877f2", color: "white" }}
-			/>
-			<p className={styles.or_container}>or</p>
 			<form onSubmit={handleSubmit} className={styles.form_container}>
 				<h2 className={styles.form_heading}>Sign up with your email address</h2>
 				<div className={styles.input_container}>
@@ -186,7 +183,7 @@ const SignUp = () => {
 						required={true}
 					/>
 				</div>
-				<div className={styles.checkbox_container}>
+				{/* <div className={styles.checkbox_container}>
 					<Checkbox
 						required={true}
 						label="Share my registration data with Spotify's content providers for marketing purposes."
@@ -200,7 +197,7 @@ const SignUp = () => {
 					To learn more about how Spotify collects, uses, shares and protects
 					your personal data, please see{" "}
 					<a href="/#">Spotify's Privacy Policy.</a>
-				</p>
+				</p> */}
 				<div className={styles.submit_btn_wrapper}>
 					<Button label="Sign Up" type="submit" isFetching={isFetching} />
 				</div>

@@ -45,14 +45,14 @@ const Home = () => {
 						<RecentlyPlayed title = "Songs you might like" navigateTo={"/"} />
 					</div>
 
-					{/* 
+					
 					<div className={styles.playlists_container}>
 						<Playlist playlists={firstPlaylists} />
 					</div>
 					<h1>Just the hits</h1>
 					<div className={styles.playlists_container}>
 						<Playlist playlists={secondPlaylists} />
-					</div> */}
+					</div>
 				</div>
 			)}
 		</Fragment>

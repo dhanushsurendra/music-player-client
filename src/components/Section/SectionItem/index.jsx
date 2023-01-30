@@ -10,7 +10,7 @@ const SectionItem = () => {
                     <img src={cover} className={styles.image} />
                 </div>
 
-                <PlayButton />
+                <PlayButton isAbsolute={true} />
 
                 <h5 class="heading__secondary">told you so</h5>
                 <p class="heading__text">Angles & Airways</p>

@@ -2,10 +2,9 @@
 	border: 1px solid var(--border-color);
 	padding: 2rem 1rem; 
 	border-radius: 10px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: relative;
+	display: block;
+	width: 100%;
+	margin: 2rem;
 }
 
 .imageContainer {

@@ -4,16 +4,17 @@ import { toast } from "react-toastify";
 import { loginStart, loginSuccess, loginFailure } from "./index";
 
 export const login = async (payload, dispatch) => {
+	console.log("Reached here");
 	dispatch(loginStart());
 	try {
 		const url = process.env.REACT_APP_API_URL + "login";
 		const { data } = await axios.post(url, payload);
-		console.log(data)
-		// const decodeData = jwt_decode(data.data);
-		// dispatch(loginSuccess({ ...decodeData, token: data.data }));
-		// toast.success(data.message);
-		// window.location = "/home";
-		// return true;
+		const decodeData = jwt_decode(data.data);
+		console.log(decodeData)
+		dispatch(loginSuccess({ ...decodeData, token: data.data }));
+		toast.success(data.message);
+		window.location = "/home";
+		return true;
 	} catch (error) {
 		console.log(error)
 		dispatch(loginFailure());

@@ -1,9 +1,10 @@
 import { BsFillPlayFill } from "react-icons/bs"
 import styles from './styles.module.scss'
 
-const PlayButton = () => {
+const PlayButton = ({ isAbsolute }) => {
+	console.log(isAbsolute)
 	return (
-		<div className={styles.playButton}>
+		<div className={styles.playButton} style={{ position: isAbsolute && 'absolute'}}>
 			<BsFillPlayFill fill="#1ed760" />
 		</div>
 	)

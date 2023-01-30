@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { logout } from "../../redux/authSlice";
-import { setCurrentSong } from "../../redux/audioPlayer";
+
 import { ClickAwayListener } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
@@ -21,12 +20,7 @@ const Navbar = () => {
 	const history = useHistory();
 	console.log(user);
 
-	const handleLogout = () => {
-		dispatch(logout());
-		dispatch(setCurrentSong(null));
-		window.location = "/login";
-	};
-
+	
 	return (
 		<div className={styles.container}>
 			<div className={styles.left}>
@@ -48,7 +42,7 @@ const Navbar = () => {
 					{menu ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
 				</div>
 			</div>
-			{menu && (
+			{/* {menu && (
 				<ClickAwayListener onClickAway={() => setMenu(false)}>
 					<div className={styles.menu} onClick={() => setMenu(false)}>
 						<Link to="/me">
@@ -63,7 +57,7 @@ const Navbar = () => {
 						</div>
 					</div>
 				</ClickAwayListener>
-			)}
+			)} */}
 		</div>
 	);
 };
