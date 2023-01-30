@@ -22,6 +22,7 @@ const PlaylistModel = ({ closeModel, playlist }) => {
 	}, [playlist]);
 
 	const handleInputState = (name, value) => {
+		console.log("Reached here");
 		setData((prev) => ({ ...prev, [name]: value }));
 	};
 

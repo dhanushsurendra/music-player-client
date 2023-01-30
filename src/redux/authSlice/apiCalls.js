@@ -7,7 +7,7 @@ export const login = async (payload, dispatch) => {
 	console.log("Reached here");
 	dispatch(loginStart());
 	try {
-		const url = process.env.REACT_APP_API_URL + "login";
+		const url = process.env.REACT_APP_API_URL + "/login";
 		const { data } = await axios.post(url, payload);
 		const decodeData = jwt_decode(data.data);
 		console.log(decodeData)

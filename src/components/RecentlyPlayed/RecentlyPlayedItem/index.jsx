@@ -18,7 +18,7 @@ const RecentlyPlayedItem = ({ no, image, title, artist, duration }) => {
                 </div>
             </div>
             <div className={styles.controls}>
-                <p style={{color: '#7c8db5'}}>3:45</p>
+                <p style={{color: '#7c8db5', fontSize: '1.5rem', fontWeight: '600'}}>3:45</p>
                 <PlayButton isAbsolute={false} />
             </div>
         </div>

@@ -19,6 +19,7 @@ import LikedSongs from "./pages/LikedSongs";
 import Profile from "./pages/Profile";
 import RightSide from "./components/RightSide";
 import SpotifyLogin from "./pages/SpotifyLogin";
+import EmotionRecognition from "./pages/EmotionDetection";
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -57,15 +58,8 @@ const App = () => {
 					</Fragment>
 				)}
 			<Switch>
-				<Route exact path="/spotifyLogin" component={SpotifyLogin} />
 				<Route exact path="/" component={Main} />
 				<PrivateRoute exact user={user} path="/home" component={Home} />
-				<PrivateRoute
-					exact
-					user={user}
-					path="/spotifyLogin"
-					component={SpotifyLogin}
-				/>
 				<PrivateRoute
 					exact
 					user={user}
@@ -90,6 +84,8 @@ const App = () => {
 				{user && <Redirect from="/login" to="/home" />}
 				<Route path="/signup" component={SignUp} />
 				<Route path="/login" component={Login} />
+				<Route path="/spotifylogin" component={SpotifyLogin} />
+				<Route path="/emotionbasedsearch" component={EmotionRecognition} />
 				<Route path="/not-found" component={NotFound} />
 				<Redirect to="/not-found" />
 			</Switch>

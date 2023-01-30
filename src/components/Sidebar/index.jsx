@@ -11,7 +11,7 @@ import { RiSearch2Fill } from 'react-icons/ri'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { BsFillHeartFill } from 'react-icons/bs'
 import { RiLogoutCircleRFill } from 'react-icons/ri'
-import { MdOutlinePlaylistPlay } from 'react-icons/md'
+import { MdLocalLibrary, MdOutlinePlaylistPlay } from 'react-icons/md'
 import { RiFolderAddFill } from 'react-icons/ri'
 import { logout } from "../../redux/authSlice";
 import { setCurrentSong } from "../../redux/audioPlayer";
@@ -71,12 +71,21 @@ const Sidebar = () => {
 				<span>Search</span>
 			</NavLink>
 
-			<NavLink
+			{/* <NavLink
 				to="/artists"
 				className={styles.menu_link}
 				activeClassName={styles.active_menu}
 			>
 				<BsFillPersonFill size={28} />
+				<span>Your Library</span>
+			</NavLink> */}
+
+			<NavLink
+				to="/collection/playlists"
+				className={styles.menu_link}
+				activeClassName={styles.active_menu}
+			>
+				<MdLocalLibrary size={28} />
 				<span>Your Library</span>
 			</NavLink>
 
@@ -108,24 +117,12 @@ const Sidebar = () => {
 				<span>Playlist</span>
 			</NavLink>
 
-			<div className={styles.menu_link} onClick={handleCreatePlayList}>
+			<div className={styles.menu_link} onClick={handleCreatePlayList} style={{cursor: 'pointer'}}>
 				<RiFolderAddFill size={28} />
 				<span>Create Playlist</span>
 			</div>
 
-			<div className={styles.underline}></div>
-
-			<div
-				style={{cursor: 'pointer'}}
-				onClick={handleLogout}
-				className={styles.menu_link}
-				activeClassName={styles.active_menu}
-			>
-				<RiLogoutCircleRFill size={28} />
-				<span>Logout</span>
-			</div>
-
-			{/* {getPlayListProgress || createPlayListProgress ? (
+			{getPlayListProgress || createPlayListProgress ? (
 				<div className={styles.progress_container}>
 					<CircularProgress
 						style={{ color: '#1ed760' }}
@@ -145,7 +142,20 @@ const Sidebar = () => {
 						</NavLink>
 					))}
 				</Fragment>
-			)} */}
+			)}
+
+			<div className={styles.underline}></div>
+
+			<div
+				style={{cursor: 'pointer'}}
+				onClick={handleLogout}
+				className={styles.menu_link}
+				activeClassName={styles.active_menu}
+			>
+				<RiLogoutCircleRFill size={28} />
+				<span>Logout</span>
+			</div>
+
 		</div>
 	)
 }

@@ -6,6 +6,8 @@ import { IconButton, CircularProgress } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import styles from "./styles.module.scss";
+import TagFacesIcon from '@mui/icons-material/TagFaces';
+import EmotionRecognition from "../EmotionDetection";
 
 const Search = () => {
 	const [search, setSearch] = useState("");
@@ -41,6 +43,9 @@ const Search = () => {
 				/>
 				<IconButton onClick={() => setSearch("")}>
 					<ClearIcon />
+				</IconButton>
+				<IconButton component={EmotionRecognition} to="/emotionbasedsearch">
+					<TagFacesIcon />
 				</IconButton>
 			</div>
 			{isFetching && (
