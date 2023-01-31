@@ -8,6 +8,11 @@ import ClearIcon from "@mui/icons-material/Clear";
 import styles from "./styles.module.scss";
 import TagFacesIcon from '@mui/icons-material/TagFaces';
 import EmotionRecognition from "../EmotionDetection";
+import SpotifyWebApi from 'spotify-web-api-node'
+
+const spotifyApi = new SpotifyWebApi({
+	clientId: process.env.REACT_APP_CLIENT_ID
+})
 
 const Search = () => {
 	const [search, setSearch] = useState("");

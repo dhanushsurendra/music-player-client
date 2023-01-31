@@ -7,12 +7,17 @@ import TextField from '../../components/Inputs/TextField'
 import Button from '../../components/Button'
 import logo from '../../images/logo-color.png'
 import styles from './styles.module.scss'
+import SpotifyLogin from '../SpotifyLogin'
+import useAuth from '../../hooks/useSpotifyAuth'
+
+const code = new URLSearchParams(window.location.search).get('code')
 
 const Login = () => {
 	const [data, setData] = useState({ email: '', password: '' })
 	const [errors, setErrors] = useState({})
 	const { isFetching } = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
+	const accessToken = useAuth(code)
 
 	const handleInputState = (name, value) => {
 		setData({ ...data, [name]: value })
@@ -38,8 +43,9 @@ const Login = () => {
 		}
 	}
 
-	return (
+	return code ? 
 		<div className={styles.container}>
+			<h1>{code}</h1>
 			<div className={styles.logo_container}>
 				<Link to="/">
 					<img src={logo} alt="logo" />
@@ -115,7 +121,7 @@ const Login = () => {
 				</Link>
 			</main>
 		</div>
-	)
+	: <SpotifyLogin/>
 }
 
 export default Login
