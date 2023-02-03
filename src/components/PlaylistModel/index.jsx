@@ -65,7 +65,7 @@ const PlaylistModel = ({ closeModel, playlist }) => {
 						handleInputState={handleInputState}
 					/>
 				</div>
-				<div className={styles.input_container}>
+				{/* <div className={styles.input_container}>
 					<FileInput
 						label="Choose Image"
 						type="image"
@@ -73,7 +73,7 @@ const PlaylistModel = ({ closeModel, playlist }) => {
 						value={data.img === "" ? defaultImg : data.img}
 						handleInputState={handleInputState}
 					/>
-				</div>
+				</div> */}
 				<Button
 					label="Submit"
 					onClick={handleSubmit}

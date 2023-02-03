@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { loginStart, loginSuccess, loginFailure } from "./index";
 
 export const login = async (payload, dispatch) => {
-	console.log("Reached here");
 	dispatch(loginStart());
 	try {
 		const url = process.env.REACT_APP_API_URL + "/login";

@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "./redux/userSlice/apiCalls";
@@ -26,6 +26,7 @@ const App = () => {
 	const location = useLocation();
 	const { user } = useSelector((state) => state.auth);
 	const { currentSong } = useSelector((state) => state.audioPlayer);
+	const [accessToken, setAccessToken] = useState(''); 
 
 	useEffect(() => {
 		let token = null;
@@ -83,9 +84,11 @@ const App = () => {
 				{user && <Redirect from="/signup" to="/home" />}
 				{user && <Redirect from="/login" to="/home" />}
 				<Route path="/signup" component={SignUp} />
-				<Route path="/login" component={Login} />
+				<Route path="/login" render={() => <Login setAccessToken={setAccessToken} />} />
+				{/* <Route path="/login" component={Login} /> */}
 				<Route path="/spotifylogin" component={SpotifyLogin} />
 				<Route path="/emotionbasedsearch" component={EmotionRecognition} />
+				{/* <PrivateRoute exact user={user} path="/search" component={<Search accessToken={accessToken} />}  /> */}
 				<Route path="/not-found" component={NotFound} />
 				<Redirect to="/not-found" />
 			</Switch>

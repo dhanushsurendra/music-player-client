@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../redux/authSlice/apiCalls'
@@ -12,13 +12,17 @@ import useAuth from '../../hooks/useSpotifyAuth'
 
 const code = new URLSearchParams(window.location.search).get('code')
 
-const Login = () => {
+const Login = ({ setAccessToken }) => {
 	const [data, setData] = useState({ email: '', password: '' })
 	const [errors, setErrors] = useState({})
 	const { isFetching } = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
-	const accessToken = useAuth(code)
 
+	// useEffect(() => {
+	// 	console.log(code.accessToken);
+	// 	setAccessToken(code.accessToken);
+	// }, [])
+	
 	const handleInputState = (name, value) => {
 		setData({ ...data, [name]: value })
 	}
@@ -43,9 +47,8 @@ const Login = () => {
 		}
 	}
 
-	return code ? 
+	return code ? (
 		<div className={styles.container}>
-			<h1>{code}</h1>
 			<div className={styles.logo_container}>
 				<Link to="/">
 					<img src={logo} alt="logo" />
@@ -121,7 +124,9 @@ const Login = () => {
 				</Link>
 			</main>
 		</div>
-	: <SpotifyLogin/>
+	) : (
+		<SpotifyLogin />
+	)
 }
 
 export default Login
