@@ -38,7 +38,7 @@ const App = () => {
 			const { user } = JSON.parse(auth);
 			if (user) token = user.token;
 		}
-
+		
 		if (user && token) {
 			getUser(user._id, dispatch);
 			getPlayLists(dispatch);
@@ -59,6 +59,7 @@ const App = () => {
 					</Fragment>
 				)}
 			<Switch>
+				<PrivateRoute path="/emotionbasedsearch" component={EmotionRecognition} />
 				<Route exact path="/" component={Main} />
 				<PrivateRoute exact user={user} path="/home" component={Home} />
 				<PrivateRoute
@@ -81,7 +82,6 @@ const App = () => {
 					component={Playlist}
 				/>
 				<PrivateRoute exact user={user} path="/me" component={Profile} />
-				<PrivateRoute path="/emotionbasedsearch" component={EmotionRecognition} />
 				{user && <Redirect from="/signup" to="/home" />}
 				{user && <Redirect from="/login" to="/home" />}
 				<Route path="/signup" component={SignUp} />

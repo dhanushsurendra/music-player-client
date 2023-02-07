@@ -8,6 +8,7 @@
 		margin: 0.5rem 0;
 		font-weight: 500;
 		font-size: 1.4rem;
+		color: var(--dark-blue);
 	}
 
 	.input {
@@ -17,6 +18,7 @@
 		border-radius: 0.5rem;
 		border: 0.1rem solid var(--black);
 		padding: 0 1rem;
+		color: var(--dark-blue) !important;
 
 		&:hover {
 			outline: 1px solid var(--black);

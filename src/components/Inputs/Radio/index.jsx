@@ -26,7 +26,7 @@ const RadioInput = ({
 						control={
 							<Radio
 								disableRipple
-								style={{ color: "#15883e", transform: "scale(1.2)" }}
+								style={{ transform: "scale(1.2)" }}
 								required={required}
 							/>
 						}

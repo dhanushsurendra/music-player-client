@@ -1,8 +1,10 @@
 .container {
+
 	h1 {
 		font-size: 3rem;
 		font-weight: 600;
 		margin-left: 3rem;
+		color: var(--dark-blue);
 	}
 	.form_container {
 		display: flex;
@@ -31,6 +33,7 @@
 				margin: 0.5rem 0;
 				font-weight: 500;
 				font-size: 1.4rem;
+				color: var(--dark-blue);
 			}
 
 			.date_of_birth {
@@ -41,6 +44,7 @@
 
 				p {
 					font-weight: normal;
+					color: var(--dark-blue);
 				}
 
 				.month {

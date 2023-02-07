@@ -71,6 +71,15 @@ const Sidebar = () => {
 				<span>Search</span>
 			</NavLink>
 
+			<NavLink
+				to="/me"
+				className={styles.menu_link}
+				activeClassName={styles.active_menu}
+			>
+				<BsFillPersonFill size={30} />
+				<span>Profile</span>
+			</NavLink>
+
 			{/* <NavLink
 				to="/artists"
 				className={styles.menu_link}
