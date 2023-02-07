@@ -42,12 +42,7 @@ const PlaylistMenu = ({ playlist, song, handleRemoveSong, closeMenu }) => {
 						</p>
 					</div>
 				)}
-				<div className={styles.option}>
-					<p>Go to artist</p>
-				</div>
-				<div className={styles.option}>
-					<p>Share</p>
-				</div>
+				
 			</div>
 		</ClickAwayListener>
 	);

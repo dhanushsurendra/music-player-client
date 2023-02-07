@@ -3,6 +3,7 @@ import TagFaces from '@mui/icons-material/TagFaces';
 import { IconButton } from '@mui/material';
 import * as faceapi from 'face-api.js';
 import React from 'react';
+import styles from "./styles.module.scss";
 
 const EmotionDetection = () => {
 
@@ -18,6 +19,7 @@ const EmotionDetection = () => {
     const loadModels = async () => {
       const MODEL_URL = process.env.PUBLIC_URL + '/models';
 
+      
       Promise.all([
         faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
         faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
@@ -72,7 +74,7 @@ const EmotionDetection = () => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <div style={{ textAlign: 'center', padding: '10px' }}>
         {
           captureVideo && modelsLoaded ?

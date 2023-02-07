@@ -109,7 +109,7 @@ const Sidebar = () => {
 			</NavLink> */}
 
 			<NavLink
-				to={"/playlist/:" + user._id}
+				to={"/playlist/" + user._id}
 				className={styles.menu_link}
 				activeClassName={styles.active_menu}
 				>

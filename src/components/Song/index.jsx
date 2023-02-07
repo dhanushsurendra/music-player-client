@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentSong } from "../../redux/audioPlayer";
 import Like from "../Like";
@@ -8,11 +8,27 @@ import PauseIcon from "@mui/icons-material/Pause";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import styles from "./styles.module.scss";
 import PlaylistMenu from "../PlaylistMenu";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { Article } from "@mui/icons-material";
 
 const Song = ({ song, playlist, handleRemoveSong }) => {
 	const [menu, setMenu] = useState(false);
 	const { currentSong } = useSelector((state) => state.audioPlayer);
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (!currentSong) return
+	
+		axios.get('http://localhost:8080/api/lyrics', {
+			params: {
+				track: currentSong.name,
+				artist: currentSong.artist
+			}
+		}).then((result) => {
+			
+		})
+	}, [currentSong])
 
 	const handleChange = () => {
 		if (currentSong && currentSong.action === "play") {
@@ -49,6 +65,11 @@ const Song = ({ song, playlist, handleRemoveSong }) => {
 				<p>{song.artist}</p>
 			</div>
 			<div className={styles.right}>
+				<Link to={"/lyrics/?artist=" + currentSong.song.artist + "&name=" + currentSong.song.name}>
+					<IconButton>
+						<Article className={styles.lyrics}></Article>
+					</IconButton>
+				</Link>
 				<Like songId={song._id} />
 				<p>{song.duration}</p>
 				<IconButton className={styles.menu_btn} onClick={() => setMenu(true)}>

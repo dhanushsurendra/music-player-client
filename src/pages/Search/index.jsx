@@ -8,8 +8,9 @@ import styles from './styles.module.scss'
 import TagFacesIcon from '@mui/icons-material/TagFaces'
 import EmotionRecognition from '../EmotionDetection'
 import SpotifyWebApi from 'spotify-web-api-node'
+import axiosInstance from '../../redux/axiosInstance'
 import { useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: process.env.REACT_APP_CLIENT_ID
@@ -17,6 +18,7 @@ const spotifyApi = new SpotifyWebApi({
 
 const Search = ({}) => {
 	const [search, setSearch] = useState('')
+	const [lyrics, setLyrics] = useState('')
 	const [results, setResults] = useState([])
 	const [isFetching, setIsFetching] = useState(false)
 
@@ -26,29 +28,28 @@ const Search = ({}) => {
 	// }, [accessToken])
 
 	const handleSearch = async ({ currentTarget: input }) => {
-		// if (!accessToken) return
-		// setSearch(input.value)
-		// setResults({})
+		setSearch(input.value)
+		setResults({})
 		// try {
-		// 	setIsFetching(true)
-		// 	spotifyApi.searchTracks(search).then(res => {
-		// 		res.body.tracks.items.map(track => {
-		// 			const smalllestAlbumImage = track.album.images.reduce((smallest, image) => {
-		// 				if (image.height < smallest.height) return image
-		// 				return image
-		// 			}, track.album.images[0])
+		// setIsFetching(true)
+		// spotifyApi.searchTracks(search).then(res => {
+		// 	res.body.tracks.items.map(track => {
+		// 		const smalllestAlbumImage = track.album.images.reduce((smallest, image) => {
+		// 			if (image.height < smallest.height) return image
+		// 			return image
+		// 		}, track.album.images[0])
 
-		// 			return {
+		// 		return {
 
-		// 			}
-		// 		})
+		// 		}
 		// 	})
+		// })
 
 		try {
-			// const url =
-			// 	process.env.REACT_APP_API_URL + `/?search=${input.value}`
-			// const { data } = await axiosInstance.get(url)
-			// setResults(data)
+			const url =
+				process.env.REACT_APP_API_URL + `/?search=${input.value}`
+			const { data } = await axiosInstance.get(url)
+			setResults(data)
 			setIsFetching(false)
 		} catch (error) {
 			console.log(error)
@@ -77,12 +78,11 @@ const Search = ({}) => {
 					</IconButton>
 				</NavLink> */}
 
-				<IconButton
-					component={EmotionRecognition}
-					to="/emotionbasedsearch"
-				>
-					<TagFacesIcon />
-				</IconButton>
+				<Link to="/emotionbasedsearch">
+					<IconButton>
+						<TagFacesIcon />
+					</IconButton>
+				</Link>
 			</div>
 			{isFetching && (
 				<div className={styles.progress_container}>
@@ -98,7 +98,7 @@ const Search = ({}) => {
 						<div className={styles.songs_container}>
 							{results.songs.map((song) => (
 								<Fragment key={song._id}>
-									<Song song={song} />
+									<Song song={song} setLyrics={setLyrics} />
 								</Fragment>
 							))}
 						</div>

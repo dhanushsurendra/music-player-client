@@ -4,7 +4,7 @@
 	position: fixed;
 	bottom: 0;
 	left: 0;
-	background-color: var(--light-black);
+	background-color: var(--dark-blue);
 	z-index: 200;
 	display: flex;
 	align-items: center;
@@ -102,5 +102,17 @@
 		flex: 1;
 		display: flex;
 		justify-content: flex-end;
+
+		.lyrics {
+			color: var(--white);
+			width: 2.2rem;
+			height: 2.2rem;
+
+			&:hover {
+				svg {
+					color: var(--primary);
+				}
+			}
+		}
 	}
 }

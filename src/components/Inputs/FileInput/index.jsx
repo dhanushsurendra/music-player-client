@@ -27,6 +27,7 @@ const FileInput = ({
 			storage,
 			type === "audio" ? `/audio/${fileName}` : `/images/${fileName}`
 		);
+		
 		const uploadTask = uploadBytesResumable(storageRef, value);
 		uploadTask.on(
 			"state_changed",

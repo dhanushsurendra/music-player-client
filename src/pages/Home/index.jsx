@@ -34,34 +34,17 @@ const Home = () => {
 		<Fragment>
 			{isFetching ? (
 				<div className={styles.progress_container}>
-					<CircularProgress
-						style={{ color: '#1ed760' }}
-						size="5rem"
-					/>
+					<CircularProgress style={{ color: "#1ed760" }} size="5rem" />
 				</div>
 			) : (
 				<div className={styles.container}>
-					<div>
-						<Section title="Global Top 50" navigateTo={'/'} />
-						<Section
-							title="Songs you might like"
-							navigateTo={'/'}
-						/>
-						<RecentlyPlayed
-							title="Songs you might like"
-							navigateTo={'/'}
-						/>
-						<Section
-							title="Songs you might like"
-							navigateTo={'/'}
-						/>
-						<Section className={styles.playlists_container}>
-							<Playlist playlists={firstPlaylists} />
-						</Section>
-						<h1>Just the hits</h1>
-						<div className={styles.playlists_container}>
-							<Playlist playlists={secondPlaylists} />
-						</div>
+					<h1>Good afternoon</h1>
+					<div className={styles.playlists_container}>
+						<Playlist playlists={firstPlaylists} />
+					</div>
+					<h1>Just the hits</h1>
+					<div className={styles.playlists_container}>
+						<Playlist playlists={secondPlaylists} />
 					</div>
 				</div>
 			)}

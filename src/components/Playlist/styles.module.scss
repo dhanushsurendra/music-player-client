@@ -2,7 +2,7 @@
 	width: 16rem;
 	padding: 2rem;
 	height: 26rem;
-	background-color: var(--mini-black);
+	background-color: var(--dark-blue);
 	border-radius: 1rem;
 	margin: 1rem;
 	cursor: pointer;
@@ -30,6 +30,6 @@
 	}
 
 	&:hover {
-		background-color: var(--light-black);
+		background-color: var(--light-shade-blue);
 	}
 }

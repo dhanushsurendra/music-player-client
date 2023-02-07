@@ -20,6 +20,7 @@ import Profile from "./pages/Profile";
 import RightSide from "./components/RightSide";
 import SpotifyLogin from "./pages/SpotifyLogin";
 import EmotionRecognition from "./pages/EmotionDetection";
+import Lyrics from './pages/Lyrics';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -55,7 +56,6 @@ const App = () => {
 						<Navbar />
 						<Sidebar />
 						{currentSong && <AudioPlayer />}
-						<RightSide />
 					</Fragment>
 				)}
 			<Switch>
@@ -81,13 +81,14 @@ const App = () => {
 					component={Playlist}
 				/>
 				<PrivateRoute exact user={user} path="/me" component={Profile} />
+				<PrivateRoute path="/emotionbasedsearch" component={EmotionRecognition} />
 				{user && <Redirect from="/signup" to="/home" />}
 				{user && <Redirect from="/login" to="/home" />}
 				<Route path="/signup" component={SignUp} />
+				<Route path="/lyrics/" component={Lyrics} />
 				<Route path="/login" render={() => <Login setAccessToken={setAccessToken} />} />
 				{/* <Route path="/login" component={Login} /> */}
 				<Route path="/spotifylogin" component={SpotifyLogin} />
-				<Route path="/emotionbasedsearch" component={EmotionRecognition} />
 				{/* <PrivateRoute exact user={user} path="/search" component={<Search accessToken={accessToken} />}  /> */}
 				<Route path="/not-found" component={NotFound} />
 				<Redirect to="/not-found" />

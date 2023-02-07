@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 const Playlist = ({ playlists }) => {
+	console.log(playlists)
 	return (
 		<Fragment>
 			{playlists.map((playlist) => (

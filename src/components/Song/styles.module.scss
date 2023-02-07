@@ -7,7 +7,13 @@
 	justify-content: space-between;
 
 	&:hover {
-		background-color: var(--light-black);
+		background-color: var(--dark-blue);
+	}
+
+	&:hover .left .play_btn {
+		svg {
+			color: var(--white) !important;
+		}
 	}
 
 	.left {
@@ -19,9 +25,10 @@
 			svg {
 				width: 2rem;
 				height: 2rem;
-				color: var(--white);
+				color: var(--mini-black);
 			}
 		}
+
 		img {
 			width: 4rem;
 			height: 4rem;
@@ -36,6 +43,7 @@
 			display: -webkit-box;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			color: var(--mini-black) !important;
 		}
 	}
 	.center {
@@ -50,6 +58,7 @@
 			display: -webkit-box;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			color: var(--mini-black) !important;
 		}
 	}
 	.right {
@@ -62,14 +71,43 @@
 		p {
 			margin: 0 0.5rem 0 1rem;
 			font-size: 1.2rem;
+			color: var(--mini-black) !important;
 		}
 
 		.menu_btn {
 			svg {
 				width: 2rem;
 				height: 2rem;
-				color: var(--white);
+				color: var(--mini-black);
 			}
 		}
+
+		.lyrics {
+			color: var(--dark-blue);
+			width: 2.2rem;
+			height: 2.2rem;
+		}
+	}
+
+	&:hover .left p {
+		color: white !important;
+	}
+
+	&:hover .right .menu_btn {
+		svg {
+			color: white !important;
+		}
+	}
+
+	&:hover .right .lyrics {
+		color: white !important;
+	}
+
+	&:hover .center p {
+		color: white !important;
+	}
+
+	&:hover .right p {
+		color: white !important;
 	}
 }
