@@ -54,7 +54,7 @@ const Home = () => {
 			) : (
 				<div className={styles.container}>
 					<h1 style={{ color: '#17202c', marginLeft: '2rem' }}>{greet}</h1>
-					<Section title="Global Top 50" playlists={firstPlaylists} />
+					<Section title="Global Top 10" playlists={firstPlaylists} />
 					<Section
 						title="Songs You Might Like"
 						playlists={firstPlaylists}
