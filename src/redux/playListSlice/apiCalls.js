@@ -5,7 +5,6 @@ import * as actions from "./index";
 const apiUrl = process.env.REACT_APP_API_URL + "/playlists";
 
 export const createPlayList = async (payload, dispatch) => {
-	console.log("Reached here");
 	dispatch(actions.createPlayListStart());
 	try {
 		const { data } = await axiosInstance.post(apiUrl, payload);

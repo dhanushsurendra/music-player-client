@@ -5,12 +5,14 @@ import Playlist from '../../components/Playlist'
 import styles from './styles.module.scss'
 import Section from '../../components/Section'
 import RecentlyPlayed from '../../components/RecentlyPlayed'
+import { useSelector } from 'react-redux'
 
 const Home = () => {
 	const [firstPlaylists, setFirstPlaylists] = useState([])
 	const [secondPlaylists, setSecondPlaylists] = useState([])
 	const [isFetching, setIsFetching] = useState(false)
-
+	const state = useSelector((state) => state.spotify)
+	
 	const getRandomPlaylists = async () => {
 		try {
 			setIsFetching(true)

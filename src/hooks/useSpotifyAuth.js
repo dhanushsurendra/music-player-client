@@ -25,7 +25,6 @@ export default function useAuth(code) {
 	useEffect(() => {
 		if (!refreshToken || !expiresIn) return
 		const interval = setInterval(() => {
-            console.log("Reached here");
 			axios
 				.post('http://localhost:8080/api/refresh', {
 					refreshToken
@@ -42,5 +41,5 @@ export default function useAuth(code) {
 		return () => clearInterval(interval)
 	}, [refreshToken, expiresIn])
 
-	return accessToken
+	return { accessToken, expiresIn, refreshToken }
 }

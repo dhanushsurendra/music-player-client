@@ -18,8 +18,6 @@ const Navbar = () => {
 	// const { user } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 	const history = useHistory();
-	console.log(user);
-
 	
 	return (
 		<div className={styles.container}>

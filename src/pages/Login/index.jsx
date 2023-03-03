@@ -2,27 +2,54 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../redux/authSlice/apiCalls'
+import { spotifyLogin } from '../../redux/spotify/apiCalls'
 import Joi from 'joi'
 import TextField from '../../components/Inputs/TextField'
 import Button from '../../components/Button'
 import logo from '../../images/logo-color.png'
 import styles from './styles.module.scss'
 import SpotifyLogin from '../SpotifyLogin'
-import useAuth from '../../hooks/useSpotifyAuth'
+import axios from 'axios'
 
 const code = new URLSearchParams(window.location.search).get('code')
 
-const Login = ({ setAccessToken }) => {
+const Login = ({ setAccessTokenFunc }) => {
 	const [data, setData] = useState({ email: '', password: '' })
 	const [errors, setErrors] = useState({})
 	const { isFetching } = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
 
+	const [accessToken, setAccessToken] = useState()
+	const [refreshToken, setRefreshToken] = useState()
+	const [expiresIn, setExpiresIn] = useState()
+
+	useEffect(() => {
+		axios
+			.post('http://localhost:8080/api/spotifyLogin', {
+				code
+			})
+			.then((res) => {
+				setAccessToken(res.data.accessToken)
+				setRefreshToken(res.data.refreshToken)
+				setExpiresIn(res.data.expiresIn)
+				window.history.pushState({}, null, '/')
+			})
+			.catch(() => {
+				window.location = '/'
+			})
+	}, [])
+
+	const auth = {
+		accessToken,
+		refreshToken,
+		expiresIn
+	}
+
 	// useEffect(() => {
-	// 	console.log(code.accessToken);
-	// 	setAccessToken(code.accessToken);
-	// }, [])
-	
+	// 	setAccessTokenFunc(accessToken)
+	// }, [auth])
+
+
 	const handleInputState = (name, value) => {
 		setData({ ...data, [name]: value })
 	}

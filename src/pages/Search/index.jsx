@@ -11,45 +11,42 @@ import SpotifyWebApi from 'spotify-web-api-node'
 import axiosInstance from '../../redux/axiosInstance'
 import { useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: process.env.REACT_APP_CLIENT_ID
 })
 
-const Search = ({}) => {
+const Search = ({ accessToken }) => {
 	const [search, setSearch] = useState('')
 	const [lyrics, setLyrics] = useState('')
 	const [results, setResults] = useState([])
 	const [isFetching, setIsFetching] = useState(false)
+	const state = useSelector((state) => state.spotify)
 
-	// useEffect(() => {
-	// 	if (!accessToken) return
-	// 	spotifyApi.setAccessToken(accessToken)
-	// }, [accessToken])
+	console.log(accessToken)
+
+	useEffect(() => {
+		if (!state.accessToken) return
+		spotifyApi.setAccessToken(state.accessToken)
+	}, [state.accessToken])
 
 	const handleSearch = async ({ currentTarget: input }) => {
 		setSearch(input.value)
 		setResults({})
-		// try {
-		// setIsFetching(true)
-		// spotifyApi.searchTracks(search).then(res => {
-		// 	res.body.tracks.items.map(track => {
-		// 		const smalllestAlbumImage = track.album.images.reduce((smallest, image) => {
-		// 			if (image.height < smallest.height) return image
-		// 			return image
-		// 		}, track.album.images[0])
-
-		// 		return {
-
-		// 		}
-		// 	})
-		// })
 
 		try {
 			const url =
 				process.env.REACT_APP_API_URL + `/?search=${input.value}`
 			const { data } = await axiosInstance.get(url)
 			setResults(data)
+
+			if (data.songs.length === 0 && data.playlists.length === 0) {
+				spotifyApi.searchTracks(search).then((res) => {
+					console.log(res)
+				})
+			}
+
 			setIsFetching(false)
 		} catch (error) {
 			console.log(error)
@@ -72,11 +69,6 @@ const Search = ({}) => {
 				<IconButton onClick={() => setSearch('')}>
 					<ClearIcon />
 				</IconButton>
-				{/* <NavLink to="/emotionbasedsearch">
-					<IconButton>
-						<TagFacesIcon />
-					</IconButton>
-				</NavLink> */}
 
 				<Link to="/emotionbasedsearch">
 					<IconButton>
