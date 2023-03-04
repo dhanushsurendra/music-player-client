@@ -8,13 +8,15 @@ import PlaylistSlice from './playListSlice'
 import audioPlayer from './audioPlayer'
 import userSlice from './userSlice'
 import spotifySlice from './spotify'
+import songsSlice from './songsSlice'
 
 const reducers = combineReducers({
 	auth: authReducer,
 	playlists: PlaylistSlice,
 	audioPlayer: audioPlayer,
 	user: userSlice,
-	spotify: spotifySlice
+	spotify: spotifySlice,
+	songs: songsSlice
 })
 
 const persistConfig = {

@@ -9,8 +9,9 @@ import { useSelector } from 'react-redux'
 
 const Home = () => {
 	const [firstPlaylists, setFirstPlaylists] = useState([])
-	// const []
 	const [secondPlaylists, setSecondPlaylists] = useState([])
+	const { user } = useSelector((state) => state.user);
+	const [top, setTop] = useState([])
 	const [greet, setGreet] = useState('')
 	const [isFetching, setIsFetching] = useState(false)
 	const state = useSelector((state) => state.spotify)
@@ -30,16 +31,27 @@ const Home = () => {
 		}
 	}
 
+	const getTop = async () => {
+		try {
+			const url = process.env.REACT_APP_API_URL + "/songs/top";
+			const { data } = await axiosInstance.get(url)
+			setTop(data.data.slice(0, 6));
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	useEffect(() => {
 		getRandomPlaylists()
+		getTop()
 
 		// greet message to be displayed
 		const myDate = new Date()
 		const hrs = myDate.getHours()
 
-		if (hrs < 12) greet = 'Good Morning'
-		else if (hrs >= 12 && hrs <= 17) setGreet('Good Afternoon')
-		else if (hrs >= 17 && hrs <= 24) setGreet('Good Evening')
+		if (hrs < 12) setGreet('Good morning')
+		else if (hrs >= 12 && hrs <= 17) setGreet('Good afternoon')
+		else if (hrs >= 17 && hrs <= 24) setGreet('Good evening')
 	}, [])
 
 	return (
@@ -54,7 +66,7 @@ const Home = () => {
 			) : (
 				<div className={styles.container}>
 					<h1 style={{ color: '#17202c', marginLeft: '2rem' }}>{greet}</h1>
-					<Section title="Global Top 10" playlists={firstPlaylists} />
+					<Section title="Global Top 10" playlists={top} notPlaylist={true} navigateTo="/songs" />
 					<Section
 						title="Songs You Might Like"
 						playlists={firstPlaylists}

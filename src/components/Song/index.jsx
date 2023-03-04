@@ -8,14 +8,23 @@ import PauseIcon from '@mui/icons-material/Pause'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import styles from './styles.module.scss'
 import PlaylistMenu from '../PlaylistMenu'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { Article } from '@mui/icons-material'
+import { TbNotes } from 'react-icons/tb'
 
 const Song = ({ song, playlist, handleRemoveSong }) => {
+
 	const [menu, setMenu] = useState(false)
 	const { currentSong } = useSelector((state) => state.audioPlayer)
 	const dispatch = useDispatch()
+
+	const convertMinutes = (seconds) => {
+		seconds = parseInt(seconds, 10)
+		let minutes = Math.floor(seconds / 60)
+		let extraSeconds = seconds % 60
+		minutes = minutes < 10 ? '0' + minutes : minutes
+		extraSeconds = extraSeconds < 10 ? '0' + extraSeconds : extraSeconds
+		return `${minutes}:${extraSeconds}`
+	}
 
 	const handleChange = () => {
 		if (currentSong && currentSong.action === 'play') {
@@ -63,13 +72,16 @@ const Song = ({ song, playlist, handleRemoveSong }) => {
 							}
 						>
 							<IconButton>
-								<Article className={styles.lyrics}></Article>
+								<TbNotes style={{ color: "#919496" }} className={styles.lyrics}></TbNotes>
 							</IconButton>
 						</Link>
 						<Like songId={song._id} />
 					</Fragment>
 				)}
-				<p>{song.duration}</p>
+
+				<div style={{ width: '5rem'}}>
+					<p>{convertMinutes(song.duration)}</p>
+				</div>
 				<IconButton
 					className={styles.menu_btn}
 					onClick={() => setMenu(true)}

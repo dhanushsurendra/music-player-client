@@ -1,30 +1,45 @@
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
-import styles from "./styles.module.scss";
+import { Fragment } from 'react'
+import { Link } from 'react-router-dom'
+import PlayButton from '../PlayButton'
+import styles from './styles.module.scss'
 
-const Playlist = ({ playlists }) => {
-	console.log(playlists)
+const Playlist = ({ playlists, notPlaylist }) => {
+	const clipText = (text) => {
+		console.log(text.length)
+		if (text.length > 15) {
+			return text.slice(0, 15) + '...'
+		}
+		return text
+	}
+
+	console.log(playlists[0]);
+
 	return (
 		<Fragment>
-			{playlists.map((playlist) => (
-				<Link key={playlist._id} to={`/playlist/${playlist._id}`}>
+			{playlists.map((song) => (
+				<Link key={song._id} to={notPlaylist ? '#' : `/playlist/${song._id}`}>
 					<div className={styles.playlist}>
-						{playlist.img === "" ? (
+						{song.img === '' ? (
 							<img
 								src="https://static.thenounproject.com/png/17849-200.png"
-								alt={playlist.name}
-								style={{ background: "#919496" }}
+								alt={song.name}
+								style={{ background: '#919496' }}
 							/>
 						) : (
-							<img src={playlist.img} alt={playlist.name} />
+							<img src={song.img} alt={song.name} />
 						)}
-						<p>{playlist.name}</p>
-						<span>{playlist.desc}</span>
+						{notPlaylist &&
+						<div className={styles.playBtnContainer}>
+							<PlayButton song={song} />
+						</div>}
+						<p>{clipText(song.name)}</p>
+						{!notPlaylist && <span>{song.desc}</span>}
+						<span>{song.artist}</span>
 					</div>
 				</Link>
 			))}
 		</Fragment>
-	);
-};
+	)
+}
 
-export default Playlist;
+export default Playlist

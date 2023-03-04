@@ -13,23 +13,23 @@ import { useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-const spotifyApi = new SpotifyWebApi({
-	clientId: process.env.REACT_APP_CLIENT_ID
-})
+// const spotifyApi = new SpotifyWebApi({
+// 	clientId: process.env.REACT_APP_CLIENT_ID
+// })
 
 const Search = ({ accessToken }) => {
 	const [search, setSearch] = useState('')
 	const [lyrics, setLyrics] = useState('')
 	const [results, setResults] = useState([])
 	const [isFetching, setIsFetching] = useState(false)
-	const state = useSelector((state) => state.spotify)
+	// const state = useSelector((state) => state.spotify)
 
-	console.log(accessToken)
+	// console.log(accessToken)
 
-	useEffect(() => {
-		if (!state.accessToken) return
-		spotifyApi.setAccessToken(state.accessToken)
-	}, [state.accessToken])
+	// useEffect(() => {
+	// 	if (!state.accessToken) return
+	// 	spotifyApi.setAccessToken(state.accessToken)
+	// }, [state.accessToken])
 
 	const handleSearch = async ({ currentTarget: input }) => {
 		setSearch(input.value)
@@ -41,11 +41,11 @@ const Search = ({ accessToken }) => {
 			const { data } = await axiosInstance.get(url)
 			setResults(data)
 
-			if (data.songs.length === 0 && data.playlists.length === 0) {
-				spotifyApi.searchTracks(search).then((res) => {
-					console.log(res)
-				})
-			}
+			// if (data.songs.length === 0 && data.playlists.length === 0) {
+			// 	spotifyApi.searchTracks(search).then((res) => {
+			// 		console.log(res)
+			// 	})
+			// }
 
 			setIsFetching(false)
 		} catch (error) {

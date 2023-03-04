@@ -7,6 +7,7 @@
 	margin: 1rem;
 	cursor: pointer;
 	border: 1px solid var(--border-color);
+	position: relative;
 
 	img {
 		width: 16rem;
@@ -20,6 +21,7 @@
 		margin: 1rem 0;
 		color: var(--dark-blue) !important;
 		transition: 0.2s color;
+		text-overflow: clip;
 	}
 
 	span {
@@ -38,5 +40,13 @@
 
 	&:hover p {
 		color: #fff !important;
+	}
+
+	.playBtnContainer {
+		position: absolute;
+		display: inline-block;
+		bottom: 24%;
+		right: 6%;
+
 	}
 }

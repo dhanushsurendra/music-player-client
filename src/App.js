@@ -16,6 +16,7 @@ import AudioPlayer from './components/AudioPlayer'
 import Playlist from './pages/Playlist'
 import Search from './pages/Search'
 import LikedSongs from './pages/LikedSongs'
+import Songs from './pages/Songs'
 import Profile from './pages/Profile'
 import RightSide from './components/RightSide'
 import SpotifyLogin from './pages/SpotifyLogin'
@@ -73,6 +74,12 @@ const App = () => {
 					user={user}
 					path="/collection/playlists"
 					component={Library}
+				/>
+				<PrivateRoute
+					exact
+					user={user}
+					path="/songs"
+					component={Songs}
 				/>
 				<PrivateRoute
 					exact
