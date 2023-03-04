@@ -10,9 +10,10 @@ import { useSelector } from 'react-redux'
 const Home = () => {
 	const [firstPlaylists, setFirstPlaylists] = useState([])
 	const [secondPlaylists, setSecondPlaylists] = useState([])
-	const { user } = useSelector((state) => state.user);
+	const { user } = useSelector((state) => state.user)
 	const [top, setTop] = useState([])
 	const [greet, setGreet] = useState('')
+	const [recents, setRecents] = useState([])
 	const [isFetching, setIsFetching] = useState(false)
 	const state = useSelector((state) => state.spotify)
 
@@ -33,17 +34,29 @@ const Home = () => {
 
 	const getTop = async () => {
 		try {
-			const url = process.env.REACT_APP_API_URL + "/songs/top";
+			const url = process.env.REACT_APP_API_URL + '/songs/top'
 			const { data } = await axiosInstance.get(url)
-			setTop(data.data.slice(0, 6));
+			setTop(data.data.slice(0, 6))
 		} catch (error) {
-			console.log(error);
+			console.log(error)
+		}
+	}
+
+	const getRecents = async () => {
+		try {
+			const url = process.env.REACT_APP_API_URL + '/songs/recents'
+			const { data } = await axiosInstance.get(url)
+			console.log(data);
+			setRecents(data.data)
+		} catch (error) {
+			console.log(error)
 		}
 	}
 
 	useEffect(() => {
 		getRandomPlaylists()
 		getTop()
+		getRecents()
 
 		// greet message to be displayed
 		const myDate = new Date()
@@ -65,14 +78,26 @@ const Home = () => {
 				</div>
 			) : (
 				<div className={styles.container}>
-					<h1 style={{ color: '#17202c', marginLeft: '2rem' }}>{greet}</h1>
-					<Section title="Global Top 10" playlists={top} notPlaylist={true} navigateTo="/songs" />
+					<h1 style={{ color: '#17202c', marginLeft: '2rem' }}>
+						{greet}
+					</h1>
+					<Section
+						title="Global Top 10"
+						playlists={top}
+						notPlaylist={true}
+						navigateTo="/songs"
+					/>
 					<Section
 						title="Songs You Might Like"
 						playlists={firstPlaylists}
 					/>
-					{firstPlaylists.length !== 0 && <Section title="My PlayLists" playlists={firstPlaylists} /> }
-					<RecentlyPlayed />
+					{firstPlaylists.length !== 0 && (
+						<Section
+							title="My PlayLists"
+							playlists={firstPlaylists}
+						/>
+					)}
+					{ recents.length !== 0 && <RecentlyPlayed songs={recents} /> }
 					{secondPlaylists.length !== 0 && (
 						<h1 style={{ color: '#17202c' }}>Just the hits</h1>
 					)}

@@ -10,6 +10,7 @@ import styles from './styles.module.scss'
 import PlaylistMenu from '../PlaylistMenu'
 import { Link } from 'react-router-dom'
 import { TbNotes } from 'react-icons/tb'
+import axiosInstance from '../../redux/axiosInstance'
 
 const Song = ({ song, playlist, handleRemoveSong }) => {
 
@@ -26,7 +27,15 @@ const Song = ({ song, playlist, handleRemoveSong }) => {
 		return `${minutes}:${extraSeconds}`
 	}
 
-	const handleChange = () => {
+	const handleChange = async () => {
+
+		try {
+			const url = process.env.REACT_APP_API_URL + "/songs/recents/" + song._id;
+			await axiosInstance.post(url)
+		} catch (error) {
+			console.log(error);
+		}
+
 		if (currentSong && currentSong.action === 'play') {
 			const payload = {
 				song: song,

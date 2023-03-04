@@ -5,14 +5,11 @@ import styles from './styles.module.scss'
 
 const Playlist = ({ playlists, notPlaylist }) => {
 	const clipText = (text) => {
-		console.log(text.length)
 		if (text.length > 15) {
 			return text.slice(0, 15) + '...'
 		}
 		return text
 	}
-
-	console.log(playlists[0]);
 
 	return (
 		<Fragment>

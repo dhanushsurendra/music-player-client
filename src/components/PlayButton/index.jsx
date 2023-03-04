@@ -1,16 +1,25 @@
-import { BsFillPlayFill } from 'react-icons/bs'
+import { useEffect } from 'react'
 import styles from './styles.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentSong } from '../../redux/audioPlayer'
 import { IconButton } from '@mui/material'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import PauseIcon from '@mui/icons-material/Pause'
+import axiosInstance from '../../redux/axiosInstance'
 
 const PlayButton = ({ song }) => {
 	const { currentSong } = useSelector((state) => state.audioPlayer)
 	const dispatch = useDispatch()
 
-	const handleChange = () => {
+	const handleChange = async () => {
+
+		try {
+			const url = process.env.REACT_APP_API_URL + "/songs/recents/" + song._id;
+			await axiosInstance.post(url)
+		} catch (error) {
+			console.log(error);
+		}
+
 		if (currentSong && currentSong.action === 'play') {
 			const payload = {
 				song: song,
@@ -18,7 +27,6 @@ const PlayButton = ({ song }) => {
 			}
 			dispatch(setCurrentSong(payload))
 		} else {
-			console.log('Reached here')
 			const payload = {
 				song: song,
 				action: 'play'
