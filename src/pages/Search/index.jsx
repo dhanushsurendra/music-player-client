@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Song from '../../components/Song'
 import Playlist from '../../components/Playlist'
 import { IconButton, CircularProgress } from '@mui/material'
@@ -6,46 +6,39 @@ import SearchIcon from '@mui/icons-material/Search'
 import ClearIcon from '@mui/icons-material/Clear'
 import styles from './styles.module.scss'
 import TagFacesIcon from '@mui/icons-material/TagFaces'
-import EmotionRecognition from '../EmotionDetection'
-import SpotifyWebApi from 'spotify-web-api-node'
 import axiosInstance from '../../redux/axiosInstance'
-import { useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-
-// const spotifyApi = new SpotifyWebApi({
-// 	clientId: process.env.REACT_APP_CLIENT_ID
-// })
+import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 const Search = ({ accessToken }) => {
 	const [search, setSearch] = useState('')
 	const [lyrics, setLyrics] = useState('')
 	const [results, setResults] = useState([])
+
+	const location = useLocation()
+	const queryParams = new URLSearchParams(location.search)
+	const emotion = queryParams.get('emotion') ?? ''
 	const [isFetching, setIsFetching] = useState(false)
-	// const state = useSelector((state) => state.spotify)
 
-	// console.log(accessToken)
-
-	// useEffect(() => {
-	// 	if (!state.accessToken) return
-	// 	spotifyApi.setAccessToken(state.accessToken)
-	// }, [state.accessToken])
+	useEffect(() => {
+		setSearch(emotion)
+		searchSongs(emotion)
+	}, [])
 
 	const handleSearch = async ({ currentTarget: input }) => {
+
 		setSearch(input.value)
 		setResults({})
 
+		await searchSongs(input.value)
+	}
+
+	const searchSongs = async (value) => {
 		try {
 			const url =
-				process.env.REACT_APP_API_URL + `/?search=${input.value}`
+				process.env.REACT_APP_API_URL + `/?search=${value}`
 			const { data } = await axiosInstance.get(url)
 			setResults(data)
-
-			// if (data.songs.length === 0 && data.playlists.length === 0) {
-			// 	spotifyApi.searchTracks(search).then((res) => {
-			// 		console.log(res)
-			// 	})
-			// }
 
 			setIsFetching(false)
 		} catch (error) {

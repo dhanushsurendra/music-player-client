@@ -2,7 +2,6 @@ import { CircularProgress } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import axiosInstance from '../../redux/axiosInstance'
 import styles from './styles.module.scss'
 
 const Lyrics = () => {
@@ -45,7 +44,7 @@ const Lyrics = () => {
 						size="5rem"
 					/>
 				)}
-				<h1>{lyrics}</h1>
+				<h1 style={{ fontWeight: 500, fontSize: "3rem" }}>{lyrics}</h1>
 			</div>
 		</div>
 	)
