@@ -14,6 +14,7 @@ const Home = () => {
 	const [top, setTop] = useState([])
 	const [greet, setGreet] = useState('')
 	const [recents, setRecents] = useState([])
+	const [recommendedSongs, setRecommendedSongs] = useState([])
 	const [isFetching, setIsFetching] = useState(false)
 	const state = useSelector((state) => state.spotify)
 
@@ -47,7 +48,18 @@ const Home = () => {
 			const url = process.env.REACT_APP_API_URL + '/songs/recents'
 			const { data } = await axiosInstance.get(url)
 			console.log(data);
-			setRecents(data.data)
+			setRecents(data.data.slice(0, 6))
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	const getRecommended = async () => {
+		try {
+			const url = process.env.REACT_APP_API_URL + '/songs/recommended'
+			const { data } = await axiosInstance.get(url)
+			setRecommendedSongs(data.data)
+			console.log(data);
 		} catch (error) {
 			console.log(error)
 		}
@@ -57,6 +69,7 @@ const Home = () => {
 		getRandomPlaylists()
 		getTop()
 		getRecents()
+		getRecommended()
 
 		// greet message to be displayed
 		const myDate = new Date()
@@ -87,10 +100,13 @@ const Home = () => {
 						notPlaylist={true}
 						navigateTo="/songs"
 					/>
+					{recommendedSongs.length !== 0 && (
 					<Section
 						title="Songs You Might Like"
-						playlists={firstPlaylists}
-					/>
+						playlists={recommendedSongs}
+						all={false}
+						notPlaylist={true}
+					/>)}
 					{firstPlaylists.length !== 0 && (
 						<Section
 							title="My PlayLists"

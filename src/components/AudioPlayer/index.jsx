@@ -10,6 +10,7 @@ import PauseIcon from '@mui/icons-material/Pause'
 import SkipNextIcon from '@mui/icons-material/SkipNext'
 import styles from './styles.module.scss'
 import { Link } from 'react-router-dom'
+import axiosInstance from '../../redux/axiosInstance'
 
 const AudioPlayer = () => {
 	const [trackProgress, setTrackProgress] = useState(0)
@@ -61,7 +62,15 @@ const AudioPlayer = () => {
 		setTrackProgress(audioRef.current.currentTime)
 	}
 
-	const handleActions = () => {
+	const handleActions = async () => {
+
+		try {
+			const url = process.env.REACT_APP_API_URL + "/songs/recents/" + currentSong._id;
+			await axiosInstance.post(url)
+		} catch (error) {
+			console.log(error);
+		}
+
 		currentSong.action === 'play'
 			? dispatch(setCurrentSong({ ...currentSong, action: 'pause' }))
 			: dispatch(setCurrentSong({ ...currentSong, action: 'play' }))

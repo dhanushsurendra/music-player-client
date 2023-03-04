@@ -65,7 +65,7 @@ const SignUp = () => {
 		if (Object.keys(errors).length === 0) {
 			try {
 				setIsFetching(true);
-				const url = process.env.REACT_APP_API_URL + "users";
+				const url = process.env.REACT_APP_API_URL + "/users";
 				console.log(url);
 				await axios.post(url, data);
 				setIsFetching(false);

@@ -32,8 +32,20 @@ const Lyrics = () => {
 
 	return (
 		<div className={styles.container}>
-			<div style={{ textAlign: 'center', whiteSpace: 'pre', width: "100%" }}>
-				<h1>{lyrics }</h1>
+			<div
+				style={{
+					textAlign: 'center',
+					whiteSpace: 'pre',
+					width: '100%'
+				}}
+			>
+				{isFetching && (
+					<CircularProgress
+						style={{ color: '#1ed760' }}
+						size="5rem"
+					/>
+				)}
+				<h1>{lyrics}</h1>
 			</div>
 		</div>
 	)
