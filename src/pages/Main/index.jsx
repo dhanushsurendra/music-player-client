@@ -9,7 +9,7 @@ import styles from "./styles.module.scss";
 
 const navLinks = [
 	{ name: "Sign up", link: "/signup" },
-	{ name: "Log in", link: "/spotifylogin" },
+	{ name: "Log in", link: "/login" },
 ];
 
 const companyLInks = ["About", "Jobs", "For the record"];

@@ -1,5 +1,4 @@
 import axiosInstance from "../axiosInstance";
-import { toast } from "react-toastify";
 import * as actions from "./index";
 
 const apiUrl = process.env.REACT_APP_API_URL + "/songs";

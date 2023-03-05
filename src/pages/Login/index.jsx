@@ -2,53 +2,20 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../redux/authSlice/apiCalls'
-import { spotifyLogin } from '../../redux/spotify/apiCalls'
 import Joi from 'joi'
 import TextField from '../../components/Inputs/TextField'
 import Button from '../../components/Button'
 import logo from '../../images/logo-color.png'
 import styles from './styles.module.scss'
-import SpotifyLogin from '../SpotifyLogin'
 import axios from 'axios'
 
 const code = new URLSearchParams(window.location.search).get('code')
 
-const Login = ({ setAccessTokenFunc }) => {
+const Login = () => {
 	const [data, setData] = useState({ email: '', password: '' })
 	const [errors, setErrors] = useState({})
 	const { isFetching } = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
-
-	const [accessToken, setAccessToken] = useState()
-	const [refreshToken, setRefreshToken] = useState()
-	const [expiresIn, setExpiresIn] = useState()
-
-	useEffect(() => {
-		axios
-			.post('http://localhost:8080/api/spotifyLogin', {
-				code
-			})
-			.then((res) => {
-				setAccessToken(res.data.accessToken)
-				setRefreshToken(res.data.refreshToken)
-				setExpiresIn(res.data.expiresIn)
-				window.history.pushState({}, null, '/')
-			})
-			.catch(() => {
-				window.location = '/'
-			})
-	}, [])
-
-	const auth = {
-		accessToken,
-		refreshToken,
-		expiresIn
-	}
-
-	// useEffect(() => {
-	// 	setAccessTokenFunc(accessToken)
-	// }, [auth])
-
 
 	const handleInputState = (name, value) => {
 		setData({ ...data, [name]: value })
@@ -74,7 +41,7 @@ const Login = ({ setAccessTokenFunc }) => {
 		}
 	}
 
-	return code ? (
+	return (
 		<div className={styles.container}>
 			<div className={styles.logo_container}>
 				<Link to="/">
@@ -118,7 +85,6 @@ const Login = ({ setAccessTokenFunc }) => {
 							required={true}
 						/>
 					</div>
-					{/* <p className={styles.forgot_password}>Forgot your password?</p> */}
 					<div
 						styles={{
 							width: '100%',
@@ -151,8 +117,6 @@ const Login = ({ setAccessTokenFunc }) => {
 				</Link>
 			</main>
 		</div>
-	) : (
-		<SpotifyLogin />
 	)
 }
 

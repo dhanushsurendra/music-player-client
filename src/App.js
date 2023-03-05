@@ -18,11 +18,8 @@ import Search from './pages/Search'
 import LikedSongs from './pages/LikedSongs'
 import Songs from './pages/Songs'
 import Profile from './pages/Profile'
-import RightSide from './components/RightSide'
-import SpotifyLogin from './pages/SpotifyLogin'
 import EmotionRecognition from './pages/EmotionDetection'
 import Lyrics from './pages/Lyrics'
-import Test from './pages/Test'
 
 const App = () => {
 	const dispatch = useDispatch()
@@ -114,7 +111,6 @@ const App = () => {
 					render={() => <Login setAccessToken={setAccessToken} />}
 				/>
 				{/* <Route path="/login" component={Login} /> */}
-				<Route path="/spotifylogin" component={SpotifyLogin} />
 				{/* <PrivateRoute exact user={user} path="/search" component={<Search accessToken={accessToken} />}  /> */}
 				<Route path="/not-found" component={NotFound} />
 				<Redirect to="/not-found" />

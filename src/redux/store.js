@@ -7,7 +7,6 @@ import authReducer from './authSlice'
 import PlaylistSlice from './playListSlice'
 import audioPlayer from './audioPlayer'
 import userSlice from './userSlice'
-import spotifySlice from './spotify'
 import songsSlice from './songsSlice'
 
 const reducers = combineReducers({
@@ -15,7 +14,6 @@ const reducers = combineReducers({
 	playlists: PlaylistSlice,
 	audioPlayer: audioPlayer,
 	user: userSlice,
-	spotify: spotifySlice,
 	songs: songsSlice
 })
 

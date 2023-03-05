@@ -7,7 +7,6 @@ import passwordComplexity from "joi-password-complexity";
 import TextField from "../../components/Inputs/TextField";
 import Select from "../../components/Inputs/Select";
 import Radio from "../../components/Inputs/Radio";
-import Checkbox from "../../components/Inputs/Checkbox";
 import Button from "../../components/Button";
 import logo from "../../images/logo-color.png";
 import styles from "./styles.module.scss";
@@ -66,7 +65,6 @@ const SignUp = () => {
 			try {
 				setIsFetching(true);
 				const url = process.env.REACT_APP_API_URL + "/users";
-				console.log(url);
 				await axios.post(url, data);
 				setIsFetching(false);
 				toast.success("Account created successfully");
@@ -93,7 +91,7 @@ const SignUp = () => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.logo}>
-				<img src={logo} alt="logo" />
+				<img src={logo} width="150rem" alt="logo" />
 			</div>
 			<h1 className={styles.heading}>Sign up for free to start listening.</h1>
 			<form onSubmit={handleSubmit} className={styles.form_container}>

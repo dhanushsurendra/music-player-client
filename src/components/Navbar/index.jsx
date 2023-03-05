@@ -2,20 +2,16 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 
-import { ClickAwayListener } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import PersonIcon from "@mui/icons-material/Person";
-import LogoutIcon from "@mui/icons-material/Logout";
 import styles from "./styles.module.scss";
 
 const Navbar = () => {
 	const [menu, setMenu] = useState(false);
 	const { user } = useSelector((state) => state.auth);
-	// const { user } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 	const history = useHistory();
 	

@@ -1,7 +1,5 @@
-import { Fragment } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Playlist from '../Playlist'
-import SectionItem from './SectionItem'
 import styles from './styles.module.scss'
 
 const Section = ({ title, navigateTo = "/", playlists, notPlaylist, all = true }) => {

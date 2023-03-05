@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import styles from './styles.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentSong } from '../../redux/audioPlayer'
@@ -15,6 +14,13 @@ const PlayButton = ({ song }) => {
 
 		try {
 			const url = process.env.REACT_APP_API_URL + "/songs/recents/" + song._id;
+			await axiosInstance.post(url)
+		} catch (error) {
+			console.log(error);
+		}
+
+		try {
+			const url = process.env.REACT_APP_API_URL + "/popular/" + song._id;
 			await axiosInstance.post(url)
 		} catch (error) {
 			console.log(error);

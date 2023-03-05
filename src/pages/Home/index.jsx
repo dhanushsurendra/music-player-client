@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useState } from 'react'
 import { CircularProgress } from '@mui/material'
 import axiosInstance from '../../redux/axiosInstance'
-import Playlist from '../../components/Playlist'
 import styles from './styles.module.scss'
 import Section from '../../components/Section'
 import RecentlyPlayed from '../../components/RecentlyPlayed'

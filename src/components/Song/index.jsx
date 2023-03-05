@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentSong } from '../../redux/audioPlayer'
 import Like from '../Like'
