@@ -1,101 +1,107 @@
-import { useState } from "react";
-import Joi from "joi";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { Link, useHistory } from "react-router-dom";
-import passwordComplexity from "joi-password-complexity";
-import TextField from "../../components/Inputs/TextField";
-import Select from "../../components/Inputs/Select";
-import Radio from "../../components/Inputs/Radio";
-import Button from "../../components/Button";
-import logo from "../../images/logo-color.png";
-import styles from "./styles.module.scss";
+import { useState } from 'react'
+import Joi from 'joi'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import { Link, useHistory } from 'react-router-dom'
+import passwordComplexity from 'joi-password-complexity'
+import TextField from '../../components/Inputs/TextField'
+import Select from '../../components/Inputs/Select'
+import Radio from '../../components/Inputs/Radio'
+import Button from '../../components/Button'
+import logo from '../../images/logo-color.png'
+import styles from './styles.module.scss'
 
 const months = [
-	{ name: "January", value: "01" },
-	{ name: "February", value: "02" },
-	{ name: "March", value: "03" },
-	{ name: "Apirl", value: "04" },
-	{ name: "May", value: "05" },
-	{ name: "June", value: "06" },
-	{ name: "July", value: "07" },
-	{ name: "Augest", value: "08" },
-	{ name: "September", value: "09" },
-	{ name: "October", value: "10" },
-	{ name: "November", value: "11" },
-	{ name: "December", value: "12" },
-];
+	{ name: 'January', value: '01' },
+	{ name: 'February', value: '02' },
+	{ name: 'March', value: '03' },
+	{ name: 'Apirl', value: '04' },
+	{ name: 'May', value: '05' },
+	{ name: 'June', value: '06' },
+	{ name: 'July', value: '07' },
+	{ name: 'Augest', value: '08' },
+	{ name: 'September', value: '09' },
+	{ name: 'October', value: '10' },
+	{ name: 'November', value: '11' },
+	{ name: 'December', value: '12' }
+]
 
-const genders = ["male", "female", "non-binary"];
+const genders = ['male', 'female', 'non-binary']
 
 const SignUp = () => {
 	const [data, setData] = useState({
-		email: "",
-		password: "",
-		name: "",
-		month: "",
-		year: "",
-		date: "",
-		gender: "",
-	});
-	const [errors, setErrors] = useState({});
-	const [isFetching, setIsFetching] = useState(false);
+		email: '',
+		password: '',
+		name: '',
+		month: '',
+		year: '',
+		date: '',
+		gender: ''
+	})
+	const [errors, setErrors] = useState({})
+	const [isFetching, setIsFetching] = useState(false)
 
-	const history = useHistory();
+	const history = useHistory()
 
 	const handleInputState = (name, value) => {
-		setData((data) => ({ ...data, [name]: value }));
-	};
+		setData((data) => ({ ...data, [name]: value }))
+	}
 
 	const handleErrorState = (name, value) => {
-		value === ""
+		value === ''
 			? delete errors[name]
-			: setErrors(() => ({ ...errors, [name]: value }));
-	};
+			: setErrors(() => ({ ...errors, [name]: value }))
+	}
 
 	const schema = {
-		email: Joi.string().email({ tlds: false }).required().label("Email"),
-		password: passwordComplexity().required().label("Password"),
-		name: Joi.string().min(5).max(10).required().label("Name"),
-	};
+		email: Joi.string().email({ tlds: false }).required().label('Email'),
+		password: passwordComplexity().required().label('Password'),
+		name: Joi.string().min(5).max(10).required().label('Name'),
+		date: Joi.number().min(1).max(31).required().label('Date'),
+		year: Joi.number().min(1900).max(2023).required().label('Date')
+	}
 
 	const handleSubmit = async (e) => {
-		e.preventDefault();
+		e.preventDefault()
 		if (Object.keys(errors).length === 0) {
 			try {
-				setIsFetching(true);
-				const url = process.env.REACT_APP_API_URL + "/users";
-				await axios.post(url, data);
-				setIsFetching(false);
-				toast.success("Account created successfully");
-				history.push("/login");
+				setIsFetching(true)
+				const url = process.env.REACT_APP_API_URL + '/users'
+				await axios.post(url, data)
+				setIsFetching(false)
+				toast.success('Account created successfully')
+				history.push('/login')
 			} catch (error) {
-				console.log(error);
-				setIsFetching(false);
+				console.log(error)
+				setIsFetching(false)
 				if (
 					error.response &&
 					error.response.status >= 400 &&
 					error.response.status < 500
 				) {
-					toast.error(error.response.data);
+					toast.error(error.response.data)
 				} else {
-					console.log(error);
-					toast.error("Something went wrong!");
+					console.log(error)
+					toast.error('Something went wrong!')
 				}
 			}
 		} else {
-			console.log("please fill out properly");
+			console.log('please fill out properly')
 		}
-	};
+	}
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.logo}>
 				<img src={logo} width="150rem" alt="logo" />
 			</div>
-			<h1 className={styles.heading}>Sign up for free to start listening.</h1>
+			<h1 className={styles.heading}>
+				Sign up for free to start listening.
+			</h1>
 			<form onSubmit={handleSubmit} className={styles.form_container}>
-				<h2 className={styles.form_heading}>Sign up with your email address</h2>
+				<h2 className={styles.form_heading}>
+					Sign up with your email address
+				</h2>
 				<div className={styles.input_container}>
 					<TextField
 						label="What's your email?"
@@ -156,7 +162,10 @@ const SignUp = () => {
 								placeholder="DD"
 								name="date"
 								value={data.date}
+								handleErrorState={handleErrorState}
 								handleInputState={handleInputState}
+								schema={schema.date}
+								error={errors.date}
 								required={true}
 							/>
 						</div>
@@ -167,7 +176,10 @@ const SignUp = () => {
 								name="year"
 								value={data.year}
 								handleInputState={handleInputState}
+								handleErrorState={handleErrorState}
 								required={true}
+								error={errors.year}
+								schema={schema.year}
 							/>
 						</div>
 					</div>
@@ -197,14 +209,21 @@ const SignUp = () => {
 					<a href="/#">Spotify's Privacy Policy.</a>
 				</p> */}
 				<div className={styles.submit_btn_wrapper}>
-					<Button label="Sign Up" type="submit" isFetching={isFetching} />
+					<Button
+						label="Sign Up"
+						type="submit"
+						isFetching={isFetching}
+					/>
 				</div>
-				<p className={styles.terms_condition} style={{ fontSize: "1.6rem" }}>
+				<p
+					className={styles.terms_condition}
+					style={{ fontSize: '1.6rem' }}
+				>
 					Have an account? <Link to="/login"> Log in.</Link>
 				</p>
 			</form>
 		</div>
-	);
-};
+	)
+}
 
-export default SignUp;
+export default SignUp
