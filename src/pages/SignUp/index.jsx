@@ -58,7 +58,7 @@ const SignUp = () => {
 		password: passwordComplexity().required().label('Password'),
 		name: Joi.string().min(5).max(10).required().label('Name'),
 		date: Joi.number().min(1).max(31).required().label('Date'),
-		year: Joi.number().min(1900).max(2023).required().label('Date')
+		year: Joi.number().min(1900).max(2010).required().label('Date')
 	}
 
 	const handleSubmit = async (e) => {

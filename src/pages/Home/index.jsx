@@ -46,7 +46,7 @@ const Home = () => {
 		try {
 			const url = process.env.REACT_APP_API_URL + '/songs/recents'
 			const { data } = await axiosInstance.get(url)
-			console.log(data);
+			console.log(data)
 			setRecents(data.data.slice(0, 6))
 		} catch (error) {
 			console.log(error)
@@ -58,7 +58,7 @@ const Home = () => {
 			const url = process.env.REACT_APP_API_URL + '/songs/recommended'
 			const { data } = await axiosInstance.get(url)
 			setRecommendedSongs(data.data)
-			console.log(data);
+			console.log(data)
 		} catch (error) {
 			console.log(error)
 		}
@@ -100,25 +100,23 @@ const Home = () => {
 						navigateTo="/songs"
 					/>
 					{recommendedSongs.length !== 0 && (
-					<Section
-						title="Songs You Might Like"
-						playlists={recommendedSongs}
-						all={false}
-						notPlaylist={true}
-					/>)}
-					{firstPlaylists.length !== 0 && (
 						<Section
-							title="My PlayLists"
-							playlists={firstPlaylists}
+							title="Songs You Might Like"
+							playlists={recommendedSongs}
+							all={false}
+							notPlaylist={true}
 						/>
 					)}
-					{ recents.length !== 0 && <RecentlyPlayed songs={recents} /> }
-					{secondPlaylists.length !== 0 && (
-						<h1 style={{ color: '#17202c' }}>Just the hits</h1>
+					{firstPlaylists.length !== 0 && (
+						<Section title="PlayLists" playlists={firstPlaylists} />
 					)}
 					{secondPlaylists.length !== 0 && (
-						<Section playlists={secondPlaylists} />
+						<Section
+							title="Just the hits"
+							playlists={secondPlaylists}
+						/>
 					)}
+					{recents.length !== 0 && <RecentlyPlayed songs={recents} />}
 				</div>
 			)}
 		</Fragment>
