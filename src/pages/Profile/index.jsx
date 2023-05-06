@@ -8,6 +8,7 @@ import Select from "../../components/Inputs/Select";
 import Radio from "../../components/Inputs/Radio";
 import Button from "../../components/Button";
 import styles from "./styles.module.scss";
+import passwordComplexity from 'joi-password-complexity'
 
 const months = [
 	{ name: "January", value: "01" },
@@ -50,7 +51,11 @@ const Profile = () => {
 	};
 
 	const schema = {
-		name: Joi.string().min(5).max(10).required().label("Name"),
+		email: Joi.string().email({ tlds: false }).required().label('Email'),
+		password: passwordComplexity().required().label('Password'),
+		name: Joi.string().min(3).max(10).required().label('Name'),
+		date: Joi.number().min(1).max(31).required().label('Date'),
+		year: Joi.number().min(1900).max(2010).required().label('Year')
 	};
 
 	const handleSubmit = async (e) => {
@@ -120,7 +125,10 @@ const Profile = () => {
 								placeholder="DD"
 								name="date"
 								value={data.date}
+								handleErrorState={handleErrorState}
 								handleInputState={handleInputState}
+								schema={schema.date}
+								error={errors.date}
 								required={true}
 							/>
 						</div>
@@ -131,7 +139,10 @@ const Profile = () => {
 								name="year"
 								value={data.year}
 								handleInputState={handleInputState}
+								handleErrorState={handleErrorState}
 								required={true}
+								error={errors.year}
+								schema={schema.year}
 							/>
 						</div>
 					</div>
